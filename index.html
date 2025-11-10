@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cedrick Johanes Ramos | Home</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<style>
+#particles-js { position: fixed; top:0; left:0; width:100%; height:100%; z-index:0; }
+.modal-overlay{position: fixed; inset:0; z-index:9999; display:flex; justify-content:center; align-items:center; background:rgba(0,0,0,0.5); opacity:0; visibility:hidden; transition:0.3s;}
+.modal-overlay.open{opacity:1; visibility:visible;}
+
+/* FOOTER FIX - Always at bottom */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+</style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+
+<!-- PARTICLE BACKGROUND -->
+<canvas id="particles-js"></canvas>
+
+<!-- HEADER -->
+<header class="bg-gray-800 text-white py-6 text-center relative z-10 shadow-lg">
+  <img src="pic.png" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto border-4 border-white mb-4 object-cover">
+  <h1 class="text-3xl font-bold">Cedrick Johanes Cirera Ramos</h1>
+  <p class="text-lg">BS Computer Science - 2C | Norzagaray College</p>
+  <div class="mt-4 space-x-3">
+    <a href="index.html" class="bg-white text-gray-800 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">Home</a>
+    <a href="resume.html" class="bg-white text-gray-800 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">Resume</a>
+    <a href="projects.html" class="bg-white text-gray-800 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">Projects</a>
+    <button onclick="openModal()" class="bg-white text-gray-800 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition">Contact</button>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="max-w-4xl mx-auto py-10 px-6 space-y-10 relative z-10">
+  <section class="bg-white shadow-md rounded-2xl p-6 text-center">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Welcome!</h2>
+    <p class="text-gray-700 text-md">Hi! I'm Cedrick Johanes Ramos, a Computer Science student passionate about software development, problem-solving, and creating efficient systems. Explore my Resume and Projects to know more about me.</p>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-gray-800 text-white text-center py-4 relative z-10">
+  <p class="text-sm">&copy; 2025 Cedrick Johanes C. Ramos | All Rights Reserved</p>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div id="contact-modal" class="modal-overlay hidden">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-visible" onclick="event.stopPropagation()">
+    <div class="bg-gray-800 text-white text-center py-4">
+      <h2 class="text-2xl font-bold">Get In Touch</h2>
+    </div>
+    <div class="p-6 space-y-5">
+      <div class="flex flex-col bg-gray-100 p-3 rounded-lg">
+        <div class="flex items-center space-x-3"><i class="fas fa-phone-alt text-gray-800"></i><span id="phone-text">+639707564530</span></div>
+        <div class="flex mt-2 space-x-2">
+          <button onclick="copyToClipboard('phone-text')" class="text-sm bg-gray-800 text-white px-3 py-1 rounded-lg hover:bg-gray-700">Copy</button>
+          <a href="tel:+639707564530" class="text-sm bg-gray-300 text-gray-800 px-3 py-1 rounded-lg hover:bg-gray-400">Call</a>
+        </div>
+      </div>
+      <div class="flex flex-col bg-gray-100 p-3 rounded-lg">
+        <div class="flex items-center space-x-3"><i class="fas fa-envelope text-gray-800"></i><span id="email-text">cjcireraramos@gmail.com</span></div>
+        <div class="flex mt-2 space-x-2">
+          <button onclick="copyToClipboard('email-text')" class="text-sm bg-gray-800 text-white px-3 py-1 rounded-lg hover:bg-gray-700">Copy</button>
+          <a href="mailto:cjcireraramos@gmail.com" class="text-sm bg-gray-300 text-gray-800 px-3 py-1 rounded-lg hover:bg-gray-400">Email</a>
+        </div>
+      </div>
+      <div class="flex flex-col bg-gray-100 p-3 rounded-lg">
+        <div class="flex items-center space-x-3"><i class="fab fa-facebook-square text-gray-800"></i><span id="fb-text">facebook.com/share/1BQPkzAYHe</span></div>
+        <div class="flex mt-2 space-x-2">
+          <button onclick="copyToClipboard('fb-text')" class="text-sm bg-gray-800 text-white px-3 py-1 rounded-lg hover:bg-gray-700">Copy</button>
+          <a href="https://www.facebook.com/share/1BQPkzAYHe/" target="_blank" class="text-sm bg-gray-300 text-gray-800 px-3 py-1 rounded-lg hover:bg-gray-400">Open</a>
+        </div>
+      </div>
+    </div>
+    <div class="bg-gray-800 text-center py-3">
+      <button onclick="closeModal()" class="bg-white text-gray-800 font-semibold px-4 py-1 rounded-lg hover:bg-gray-200">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script>
+const modal = document.getElementById('contact-modal');
+function openModal(){modal.classList.remove('hidden');setTimeout(()=>modal.classList.add('open'),10);modal.addEventListener('click',closeModalOutside);}
+function closeModal(){modal.classList.remove('open');setTimeout(()=>modal.classList.add('hidden'),300);modal.removeEventListener('click',closeModalOutside);}
+function closeModalOutside(e){if(e.target===modal)closeModal();}
+function copyToClipboard(id){const text=document.getElementById(id).innerText; navigator.clipboard.writeText(text).then(()=>alert("Copied: "+text)).catch(()=>alert("Failed to copy"));}
+
+// PARTICLES
+const canvas=document.getElementById('particles-js');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+let particles=[];
+for(let i=0;i<120;i++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,d:Math.random()*1+0.5});}
+function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);for(let p of particles){ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle="rgba(107,114,128,0.7)";ctx.fill();}connectParticles();updateParticles();requestAnimationFrame(draw);}
+function updateParticles(){for(let p of particles){p.y+=p.d;if(p.y>canvas.height){p.x=Math.random()*canvas.width;p.y=0;}}}
+function connectParticles(){for(let a=0;a<particles.length;a++){for(let b=a+1;b<particles.length;b++){let dx=particles[a].x-particles[b].x;let dy=particles[a].y-particles[b].y;let dist=Math.sqrt(dx*dx+dy*dy);if(dist<100){ctx.beginPath();ctx.strokeStyle="rgba(107,114,128,"+(1-dist/100)+")";ctx.lineWidth=1;ctx.moveTo(particles[a].x,particles[a].y);ctx.lineTo(particles[b].x,particles[b].y);ctx.stroke();}}}}
+draw();
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+</script>
+
+</body>
+</html>
